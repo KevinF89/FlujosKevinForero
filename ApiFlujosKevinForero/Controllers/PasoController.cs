@@ -1,4 +1,5 @@
-﻿using ApiFlujosKevinForero.Models.Flujo;
+﻿using ApiFlujosKevinForero.MappingExtensions;
+using ApiFlujosKevinForero.Models.Paso;
 using Business.Services;
 using Data.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -8,23 +9,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApi.MappingExtensions;
 
-namespace ApiFlujosKevinForero.Controllers
+namespace ApiPasosKevinForero.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class FlujoController : ControllerBase
+    public class PasoController : ControllerBase
     {
-        private readonly FlujoService _flujoService;
+        private readonly PasoService _pasoService;
 
-        public FlujoController(IService flujoService)
+        public PasoController(IService pasoService)
         {
-            this._flujoService = (FlujoService)flujoService;
+            this._pasoService = (PasoService)pasoService;
         }
 
         [HttpGet]
-        public async Task<ActionResult> Get([FromQuery] FilterFlujo filter)
+        public async Task<ActionResult> Get([FromQuery] PasoFilter filter)
         {
-            List<Data.Entities.Flujo> result = await this._flujoService.GetAsync(flujoId: filter.FlujoId, nombre: filter.Nombre);
+            List<Data.Entities.Paso> result = await this._pasoService.GetAsync(pasoId: filter.IdPaso, nombre: filter.Nombre, flujoId: filter.IdFlujo);
 
             return this.Ok(
                 new
@@ -34,11 +35,11 @@ namespace ApiFlujosKevinForero.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody] FlujoModel model)
+        public ActionResult Post([FromBody] PasoSaveModel model)
         {
             if (ModelState.IsValid)
             {
-                Data.Entities.Flujo inserResult = this._flujoService.InsertFlujoAsync(model.ToEntity()).Result;
+                 Data.Entities.Paso inserResult = this._pasoService.InsertPasoAsync(model.ToEntity(), camposRequeridos: model.CamposRequeridos, pasosRequeridos: model.PasosRequeridos).Result;
 
 
                 return this.Ok(
@@ -54,11 +55,11 @@ namespace ApiFlujosKevinForero.Controllers
         }
 
         [HttpPut]
-        public ActionResult Put([FromBody] FlujoModel model)
+        public ActionResult Put([FromBody] PasoSaveModel model)
         {
             if (ModelState.IsValid)
             {
-                Data.Entities.Flujo updateResult = this._flujoService.UpdateFlujoAsync(model.ToEntity()).Result;
+                Data.Entities.Paso updateResult = this._pasoService.UpdatePasoAsync(model.ToEntity(), camposRequeridos: model.CamposRequeridos, pasosRequeridos:  model.PasosRequeridos).Result;
 
 
                 return this.Ok(
@@ -74,11 +75,11 @@ namespace ApiFlujosKevinForero.Controllers
         }
 
         [HttpDelete]
-        public ActionResult Delete(int flujoId)
+        public ActionResult Delete(int pasoId)
         {
             if (ModelState.IsValid)
             {
-                bool updateResult = this._flujoService.DeleteflujoAsync(flujoId: flujoId).Result;
+                bool updateResult = this._pasoService.DeletepasoAsync(pasoId: pasoId).Result;
 
 
                 return this.Ok(

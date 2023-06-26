@@ -34,7 +34,8 @@ namespace ApiFlujosKevinForero
             services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("Apiconn")));
             services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddTransient<IContext, Context>();
-            services.AddTransient<IFlujoService, FlujoService>();
+            services.AddTransient<IService, FlujoService>();
+            services.AddTransient<IService, PasoService>();
             services.AddControllers();
         }
 

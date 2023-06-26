@@ -11,7 +11,7 @@ using Data.Repositories;
 
 namespace Business.Services
 {
-    public class FlujoService : IFlujoService
+    public class FlujoService : IService
     {
         private readonly IBaseRepository<Flujo> _repositoryFlujo;
 
@@ -38,7 +38,7 @@ namespace Business.Services
 
         public async Task<Flujo> UpdateFlujoAsync(Flujo flujo)
         {
-            Flujo updateFlujo = this.Query(flujoId: flujo.IdFLujo, tracking: true).FirstOrDefault();
+            Flujo updateFlujo = this.Query(flujoId: flujo.IdFlujo, tracking: true).FirstOrDefault();
 
             updateFlujo.Nombre = flujo.Nombre;
 
@@ -66,7 +66,7 @@ namespace Business.Services
 
             if (flujoId.HasValue)
             {
-                query = query.Where(w => w.IdFLujo.Equals(flujoId.Value));
+                query = query.Where(w => w.IdFlujo.Equals(flujoId.Value));
             }
 
             if (!string.IsNullOrEmpty(nombre))
@@ -74,7 +74,7 @@ namespace Business.Services
                 query = query.Where(w => w.Nombre.Equals(nombre));
             }
 
-            query = query.OrderBy(ob => ob.IdFLujo);
+            query = query.OrderBy(ob => ob.IdFlujo);
 
             return query;
         }

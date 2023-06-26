@@ -16,7 +16,6 @@
   <ItemGroup>
     <Folder Include="Models\Campo\" />
     <Folder Include="Models\FlujoUsuario\" />
-    <Folder Include="Models\Paso\" />
     <Folder Include="Models\Usuario\" />
   </ItemGroup>
 

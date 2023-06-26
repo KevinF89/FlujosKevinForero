@@ -11,10 +11,9 @@ namespace Data.Entities
         [Key]
         public int IdPaso { get; set; }
         public string Nombre { get; set; }
-
-        [ForeignKey("IdFLujo")]
-        public int IdFLujo { get; set; }
+        public int IdFlujo { get; set; }
         public int Posicion { get; set; }
+        [ForeignKey("IdFlujo")]
         public virtual Flujo Flujo { get; set; }
         public virtual IEnumerable<CampoRequeridoPaso> CamposRequeridos { get; set; }
         public virtual IEnumerable<PasoRequeridoPaso> PasosRequeridos { get; set; }

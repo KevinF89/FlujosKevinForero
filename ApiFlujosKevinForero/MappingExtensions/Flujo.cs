@@ -12,7 +12,7 @@ namespace WebApi.MappingExtensions
         {
             Data.Entities.Flujo cliente = new Data.Entities.Flujo
             {
-                IdFLujo = model.IdFlujo,
+                IdFlujo = model.IdFlujo,
                 Nombre = model.Nombre
             };
 
@@ -23,7 +23,7 @@ namespace WebApi.MappingExtensions
         {
             FlujoModel cliente = new FlujoModel
             {
-                IdFlujo = entity.IdFLujo,
+                IdFlujo = entity.IdFlujo,
                 Nombre = entity.Nombre,
             };
 

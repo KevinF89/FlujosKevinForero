@@ -39,7 +39,7 @@ namespace Data
 
             modelBuilder.Entity<PasoRequeridoPaso>()
                 .HasOne(prp => prp.PasoRequerido)
-                .WithMany()
+                .WithMany(p => p.PasosDependientes)
                 .HasForeignKey(prp => prp.IdPasoRequerido);
 
 
